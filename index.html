@@ -3,169 +3,253 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Perguntas Frequentes | Estúdio Personal Cross</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+
+    <title>Perguntas Frequentes | EPC</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="shortcut icon" href="https://personalcross.github.io/assets/favicon/favicon.png">
+    <link rel="stylesheet" href="https://personalcross.github.io/assets/variables.css">
     <link rel="stylesheet" href="https://personalcross.github.io/assets/global-style.css">
+    <link rel="stylesheet" href="https://personalcross.github.io/assets/components/custom-header.css">
+    <link rel="stylesheet" href="https://personalcross.github.io/assets/components/custom-nav.css">
+    <link rel="stylesheet" href="https://personalcross.github.io/assets/components/hamburger.css">
+    <link rel="stylesheet" href="https://personalcross.github.io/assets/components/settings.css">
     <link rel="stylesheet" href="./style.css">
+
+    <!-- must be the last one -->
+    <link rel="stylesheet" href="https://personalcross.github.io/assets/responsive.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>Perguntas Frequentes</h1>
-        <p>Respostas baseadas em ciência para dúvidas comuns sobre treino e saúde.</p>
+    <header class="custom-header">
+        <nav class="custom-nav">
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <span class="custom-nav-links">
+                <a href="https://personalcross.github.io/home">Home</a>
+                <a href="https://personalcross.github.io/check-in">Check-in</a>
+                <a href="https://personalcross.github.io/modalities">Modalidades</a>
+                <a href="https://personalcross.github.io/nosso-time/">Nosso Time</a>
+                <a href="https://personalcross.github.io/perguntas-frequentes/">Perguntas Frequentes</a>
+                <a href="https://personalcross.github.io/sobre/">Sobre</a>
+            </span>
+            <img class="settings-icon" src="https://personalcross.github.io/assets/store/settings.png" alt="settings"
+                width="10%">
+        </nav>
     </header>
 
-    <section>
-        <h2 class="section-title">Dúvidas Comuns</h2>
+    <main>
+        <!-- Settings Sidebar -->
+        <aside class="settings-sidebar">
+            <button class="close-settings">X</button>
+            <div class="settings-options">
+                <button id="btn-login" class="guest-only">Entrar</button>
+                <button id="btn-signup" class="guest-only">Registrar</button>
 
-        <div class="faq-item">
-            <div class="faq-question">
-                Treino de força é seguro para pessoas mais velhas?
-                <span class="faq-icon">&lt;</span>
+                <button id="btn-gym" class="admin-only">Academia</button>
+                <button id="btn-customers" class="admin-only">Clientes</button>
+                <button id="btn-exercises" class="admin-only">Exercícios</button>
+                <button id="btn-prescriptions" class="admin-only">Prescrições</button>
+                <button id="btn-workouts" class="admin-only">Treinos</button>
+
+                <hr class="admin-only" />
+                <button id="btn-manage-accounts" class="admin-only">Gestão de Contas</button>
+                <button id="btn-logout" class="logged-only">Sair</button>
             </div>
-            <div class="faq-answer">
-                Sim. Quando bem orientado, o treino de força é uma das intervenções mais eficazes
-                para melhorar mobilidade, equilíbrio e qualidade de vida em idosos.
+        </aside>
+
+        <section>
+            <h2 class="section-title">Perguntas Frequentes</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Treino de força é seguro para pessoas mais velhas?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Sim. Quando bem orientado, o treino de força é uma das intervenções mais eficazes
+                    para melhorar mobilidade, equilíbrio e qualidade de vida em idosos.
+                </div>
             </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Levantamento de peso não desgasta as articulações?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Pelo contrário. Com técnica adequada e progressão controlada, fortalece músculos
+                    e estruturas articulares, reduzindo risco de lesões no dia a dia.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Existe um tipo de exercício físico ideal para pessoas idosas?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Não existe um único exercício ideal. O mais recomendado é combinar exercícios
+                    aeróbicos, de força, equilíbrio e flexibilidade, adaptados à condição física e
+                    às limitações de cada pessoa.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Preciso estar em forma antes de começar?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Não. O treino deve adaptar-se ao seu nível atual. Começar do zero é perfeitamente
+                    normal e esperado.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Treino de força ajuda na perda de peso?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Sim. Aumenta massa muscular, melhora metabolismo e contribui para uma composição
+                    corporal mais saudável.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Mulheres ficam “demasiado musculadas” com pesos?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Não. O desenvolvimento muscular significativo exige condições hormonais e estímulos
+                    específicos que não ocorrem acidentalmente.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Qual a importância da técnica no treino?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Técnica é fundamental para eficiência, segurança e progressão. É um dos pilares
+                    centrais do nosso método.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Quantas vezes por semana devo treinar?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Depende do objetivo e disponibilidade. Em muitos casos, 2 a 3 sessões semanais já
+                    produzem resultados consistentes.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Treino pode ajudar na prevenção de doenças?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Sim. Está associado à redução de risco de doenças cardiovasculares, metabólicas
+                    e melhoria da saúde mental.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    É necessário treinar até à exaustão para ter resultados?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Não. Resultados vêm de consistência, progressão e gestão adequada da carga,
+                    não de exaustão constante.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Por que pessoas idosas precisam fazer exercício físico?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Porque a prática regular ajuda a manter a força muscular, melhorar o equilíbrio
+                    e a mobilidade, prevenir quedas, controlar doenças crónicas e preservar a autonomia
+                    e a qualidade de vida.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Quanto tempo leva para ver resultados?
+                    <span class="faq-icon">&lt;</span>
+                </div>
+                <div class="faq-answer">
+                    Resultados iniciais podem surgir em poucas semanas, mas adaptações sólidas e duradouras
+                    exigem consistência ao longo de meses.
+                </div>
+            </div>
+
+        </section>
+
+        <div class="highlight">
+            <p>
+                No Estúdio Personal Cross, substituímos mitos por evidência e adaptação real ao indivíduo.
+            </p>
         </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Levantamento de peso não desgasta as articulações?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Pelo contrário. Com técnica adequada e progressão controlada, fortalece músculos
-                e estruturas articulares, reduzindo risco de lesões no dia a dia.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Existe um tipo de exercício físico ideal para pessoas idosas?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Não existe um único exercício ideal. O mais recomendado é combinar exercícios 
-                aeróbicos, de força, equilíbrio e flexibilidade, adaptados à condição física e 
-                às limitações de cada pessoa.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Preciso estar em forma antes de começar?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Não. O treino deve adaptar-se ao seu nível atual. Começar do zero é perfeitamente
-                normal e esperado.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Treino de força ajuda na perda de peso?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Sim. Aumenta massa muscular, melhora metabolismo e contribui para uma composição
-                corporal mais saudável.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Mulheres ficam “demasiado musculadas” com pesos?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Não. O desenvolvimento muscular significativo exige condições hormonais e estímulos
-                específicos que não ocorrem acidentalmente.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Qual a importância da técnica no treino?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Técnica é fundamental para eficiência, segurança e progressão. É um dos pilares
-                centrais do nosso método.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Quantas vezes por semana devo treinar?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Depende do objetivo e disponibilidade. Em muitos casos, 2 a 3 sessões semanais já
-                produzem resultados consistentes.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Treino pode ajudar na prevenção de doenças?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Sim. Está associado à redução de risco de doenças cardiovasculares, metabólicas
-                e melhoria da saúde mental.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                É necessário treinar até à exaustão para ter resultados?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Não. Resultados vêm de consistência, progressão e gestão adequada da carga,
-                não de exaustão constante.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Por que pessoas idosas precisam fazer exercício físico?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Porque a prática regular ajuda a manter a força muscular, melhorar o equilíbrio 
-                e a mobilidade, prevenir quedas, controlar doenças crónicas e preservar a autonomia 
-                e a qualidade de vida.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-question">
-                Quanto tempo leva para ver resultados?
-                <span class="faq-icon">&lt;</span>
-            </div>
-            <div class="faq-answer">
-                Resultados iniciais podem surgir em poucas semanas, mas adaptações sólidas e duradouras
-                exigem consistência ao longo de meses.
-            </div>
-        </div>
-
-    </section>
-
-    <div class="highlight">
-        <p>
-            No Estúdio Personal Cross, substituímos mitos por evidência e adaptação real ao indivíduo.
-        </p>
-    </div>
+    </main>
 
     <footer>
-        © 2026 Estúdio Personal Cross · Todos os direitos reservados
+        <div class="highlight">
+            <div class="highlight-logo">
+                <div>
+                    <a href="#">
+                        <img src="https://personalcross.github.io/assets/store/epc-logo.png" alt="logo">
+                    </a>
+                    <!-- <p>Treino personalizado e ciência aplicada.</p> -->
+                </div>
+            </div>
+            <div class="highlight-social">
+                <p>Siga-nos:</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/ep.cross?igsi=NGg0cnl1aTFvYTFr" aria-label="Instagram"
+                        target="_blank" rel="noopener noreferrer">
+                        <img src="https://www.vectorlogo.zone/logos/instagram/instagram-tile.svg" alt="instagram">
+                    </a>
+                    <a href="https://www.instagram.com/ep.cross?igsi=NGg0cnl1aTFvYTFr" aria-label="LinkedIn"
+                        target="_blank" rel="noopener noreferrer">
+                        <img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-tile.svg" alt="linkedin">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © <span id="current-year"></span> Estúdio Personal Cross · Todos os direitos reservados
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="cs.js"></script>
+    <script src="config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="hamburgerui.js"></script>
+    <script src="sidebarui.js"></script>
+    <script src="auth.js"></script>
+    <script src="time.js"></script>
+    <script src="toggle.js"></script>
 
 </body>
 
